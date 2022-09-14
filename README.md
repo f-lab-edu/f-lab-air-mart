@@ -1,12 +1,12 @@
 # Air Mart
 
 ## 사용 기술 스택
-Spring Boot
-Spring Cloud
-Spring Security
-Docker
-MySQL
-Redis
+- Spring Boot
+- Spring Cloud
+- Spring Security
+- Docker
+- MySQL
+- Redis
 ...
 
 ## 서비스 소개
