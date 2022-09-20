@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @NoArgsConstructor @AllArgsConstructor @Builder
 @Entity
-public class Order {
+public class Order extends BaseAuditor{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
