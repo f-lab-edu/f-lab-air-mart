@@ -3,11 +3,13 @@ spring:
     name: API-GATEWAY-SERVICE
   cloud:
     discovery:
-      locator:
-        enabled: true
+      enabled: true
     gateway:
       routes:
-        # ?? ?? ??
+        - id: ORDER-COMMAND-SERVICE
+          uri: lb://ORDER-COMMAND-SERVICE
+          predicates:
+            - Path=/orders/command/**
 
 server:
   port: 8072
