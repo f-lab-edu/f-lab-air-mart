@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NoArgsConstructor @AllArgsConstructor @Builder
+@Table(name = "orders")
 @Entity
 public class Order extends BaseAuditor{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

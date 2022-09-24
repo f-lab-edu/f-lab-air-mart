@@ -11,11 +11,10 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@MappedSuperclass
-@EntityListeners(value = AuditingEntityListener.class)
 @Getter
+@MappedSuperclass
 public class BaseAuditor {
-    @Column(nullable = false, updatable = false)
+    @Column
     @CreatedDate
     private LocalDateTime createdTime;
 

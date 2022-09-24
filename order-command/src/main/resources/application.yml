@@ -1,9 +1,21 @@
+server:
+  port: 9100
+
 spring:
   application:
     name: ORDER-COMMAND-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/orders?useSSL=false&serverTimezone=Asia/Seoul"
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
 
-server:
-  port: 9100
 
 eureka:
   client:
