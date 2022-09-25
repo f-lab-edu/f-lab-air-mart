@@ -9,6 +9,7 @@ import java.util.List;
 public interface ItemCommandService {
     ItemCommandDTO.Response getItemById(Long id);
     List<ItemCommandDTO.Response> getItemList(Category category, Pageable pageable);
+    List<ItemCommandDTO.Response> getClosingItemList();
     void createItem(ItemCommandDTO.Request itemDTO);
     void editItem(Long itemId, ItemCommandDTO.Request itemDTO);
     void deleteItem(Long itemId);

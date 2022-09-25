@@ -33,6 +33,9 @@ public class Item {
     @Column(nullable = false)
     private String userName;
 
+    @Column(nullable = false)
+    private LocalDateTime closedAt;
+
     @Column(columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime createdAt;
 

@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,8 +38,17 @@ public class ItemCommandServiceImpl implements ItemCommandService {
     }
 
     @Override
+    public List<ItemCommandDTO.Response> getClosingItemList() {
+        return itemCommandRepository.findTop1000ByClosedAtIsAfterOrderByClosedAtAsc(LocalDateTime.now())
+                .stream()
+                .map(itemCommandMapper::toItemDtoResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void createItem(ItemCommandDTO.Request itemDTO) {
         Item item = itemCommandMapper.toItemEntity(itemDTO);
+
         itemCommandRepository.save(item);
     }
 

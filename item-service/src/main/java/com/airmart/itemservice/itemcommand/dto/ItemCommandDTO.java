@@ -16,6 +16,7 @@ public class ItemCommandDTO {
         String userName;
         Long itemPrice;
         String category;
+        Long days;
     }
 
     @Data
@@ -28,5 +29,6 @@ public class ItemCommandDTO {
         Long itemPrice;
         String category;
         String userName;
+        String closingDateTime;
     }
 }

@@ -5,6 +5,8 @@ import com.airmart.itemservice.itemcommand.domain.entity.Item;
 import com.airmart.itemservice.itemcommand.dto.ItemCommandDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class ItemCommandMapper {
     public ItemCommandDTO.Response toItemDtoResponse(Item item){
@@ -14,6 +16,7 @@ public class ItemCommandMapper {
                 .itemPrice(item.getPrice())
                 .category(item.getCategory().toString())
                 .userName(item.getUserName())
+                .closingDateTime(item.getClosedAt().toString())
                 .build();
     }
 
@@ -23,6 +26,8 @@ public class ItemCommandMapper {
                 .price(itemDto.getItemPrice())
                 .userName(itemDto.getUserName())
                 .category(Category.valueOf(itemDto.getCategory().toUpperCase()))
+                .closedAt(LocalDateTime.now()
+                        .plusDays(itemDto.getDays() != null ? itemDto.getDays() : 7L))
                 .build();
 
     }

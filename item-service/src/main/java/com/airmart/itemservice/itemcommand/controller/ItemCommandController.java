@@ -50,4 +50,11 @@ public class ItemCommandController {
         itemCommandService.deleteItem(Long.parseLong(id));
         return ResponseEntity.ok().body(CommonResponse.success("item deleted"));
     }
+
+    @GetMapping("/closing")
+    public ResponseEntity<CommonResponse<List<ItemCommandDTO.Response>>> getClosingItems(){
+        List<ItemCommandDTO.Response> itemList = itemCommandService
+                .getClosingItemList();
+        return ResponseEntity.ok().body(CommonResponse.success(itemList));
+    }
 }
