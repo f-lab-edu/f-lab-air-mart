@@ -9,7 +9,8 @@ spring:
         - id: ORDER-COMMAND-SERVICE
           uri: lb://ORDER-COMMAND-SERVICE
           predicates:
-            - Path=/orders/command/**
+            - Path=/orders/**
+            - Method=POST,PUT,DELETE
 
 server:
   port: 8072
