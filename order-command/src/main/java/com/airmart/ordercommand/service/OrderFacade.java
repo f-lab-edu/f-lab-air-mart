@@ -1,5 +1,7 @@
 package com.airmart.ordercommand.service;
 
+import com.airmart.ordercommand.domain.GroupOrder;
+import com.airmart.ordercommand.domain.Order;
 import com.airmart.ordercommand.dto.request.OrderRequestDto.GroupOrderCreateRequest;
 import com.airmart.ordercommand.dto.request.OrderRequestDto.OrderCreateRequest;
 import com.airmart.ordercommand.dto.response.OrderResponseDto.GroupOrderCreateResponse;
@@ -24,10 +26,13 @@ public class OrderFacade {
   }
 
   public GroupOrderCreateResponse createGroupOrder(GroupOrderCreateRequest request) {
+    // Item 조회, 재고 확인
+
     // GroupOrder 와 Order 생성
+    GroupOrder groupOrder = orderService.createGroupOrder(request.toEntity());
     // 결제 (paymentService)
-    // 공구 성공여부 판단
-    // 성공시 부가 작업 실행
+
+    // 공구 성공여부 판단 -> 성공시 부가 작업 실행
     return null;
   }
 }
