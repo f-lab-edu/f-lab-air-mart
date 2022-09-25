@@ -10,5 +10,10 @@ public class OrderResponseDto {
 
   }
 
+  @Data
+  public static class GroupOrderCreateResponse {
+
+  }
+
 
 }
