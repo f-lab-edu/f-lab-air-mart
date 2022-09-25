@@ -1,5 +1,7 @@
 package com.airmart.itemservice.itemcommand.service.implement;
 
+import com.airmart.itemservice.common.exception.BusinessException;
+import com.airmart.itemservice.common.exception.BusinessExceptionDictionary;
 import com.airmart.itemservice.itemcommand.domain.Category;
 import com.airmart.itemservice.itemcommand.domain.entity.Item;
 import com.airmart.itemservice.itemcommand.dto.ItemDTO;
@@ -17,6 +19,13 @@ import java.util.stream.Collectors;
 public class ItemCommandServiceImpl implements ItemCommandService {
     private final ItemCommandRepository itemCommandRepository;
     private final ItemMapper itemMapper;
+
+    @Override
+    public ItemDTO.Response getItemById(Long id) {
+        Item item = itemCommandRepository.findById(id)
+                .orElseThrow(() -> BusinessException.create(BusinessExceptionDictionary.UNKNOWN));
+        return itemMapper.toItemDtoResponse(item);
+    }
 
     @Override
     public List<ItemDTO.Response> getItemList(Category category, Pageable pageable) {

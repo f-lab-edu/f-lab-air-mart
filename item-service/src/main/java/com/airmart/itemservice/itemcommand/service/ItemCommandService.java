@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ItemCommandService {
+    ItemDTO.Response getItemById(Long id);
     List<ItemDTO.Response> getItemList(Category category, Pageable pageable);
     void createItem(ItemDTO.Request itemDTO);
     void editItem(Long itemId, ItemDTO.Request itemDTO);

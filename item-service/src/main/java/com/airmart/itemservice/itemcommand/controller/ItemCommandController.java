@@ -14,13 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
-public class ItemController {
+public class ItemCommandController {
 
     private final ItemCommandService itemCommandService;
 
-    @GetMapping
-    public ResponseEntity<String> getItems(){
-        return ResponseEntity.ok("itemList");
+    @GetMapping("/id/{id}")
+    public ResponseEntity<CommonResponse<ItemDTO.Response>> getItemById(@PathVariable String id){
+        ItemDTO.Response response = itemCommandService.getItemById(Long.parseLong(id));
+        return ResponseEntity.ok().body(CommonResponse.success(response));
     }
 
     @GetMapping("/categories/{category}")
