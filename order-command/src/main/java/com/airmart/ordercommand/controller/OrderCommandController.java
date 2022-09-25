@@ -1,15 +1,25 @@
 package com.airmart.ordercommand.controller;
 
+import static com.airmart.ordercommand.dto.request.OrderRequestDto.*;
+
 import com.airmart.ordercommand.common.dto.CommonResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.airmart.ordercommand.dto.response.OrderResponseDto.OrderCreateResponse;
+import com.airmart.ordercommand.service.OrderFacade;
+import com.airmart.ordercommand.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/orders")
 public class OrderCommandController {
+
+    private final OrderFacade orderFacade;
     @PostMapping("/hello")
     public String helloPost() {
         return "Hello";
@@ -17,13 +27,15 @@ public class OrderCommandController {
 
     /**
      *
-     * @param groupOrderId : Format => YYYYMMDDHHMMSS-UUID
+     * @param request:OrderCreateRequest
      * @return CommonResponse
      */
-    @PostMapping("/{groupOrderId}")
-    public CommonResponse createOrder(
-        @PathVariable(required = false) String groupOrderId
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CommonResponse<OrderCreateResponse> createOrder(
+        @RequestBody OrderCreateRequest request
     ) {
-        return CommonResponse.success();
+        OrderCreateResponse response = orderFacade.createOrder(request);
+        return CommonResponse.success(response);
     }
 }

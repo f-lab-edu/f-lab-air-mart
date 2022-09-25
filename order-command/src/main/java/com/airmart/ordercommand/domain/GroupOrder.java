@@ -16,7 +16,7 @@ public class GroupOrder extends BaseAuditor {
      */
     private String groupOrderId;
 
-    @OneToMany(mappedBy = "groupOrder")
+    @OneToMany(mappedBy = "groupOrder", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
     private Integer minimumQuantity;
