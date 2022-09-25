@@ -1,5 +1,6 @@
 package com.airmart.ordercommand.domain;
 
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,4 +16,7 @@ public class GroupOrder extends BaseAuditor {
 
     private Integer minimumQuantity;
 
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
 }
