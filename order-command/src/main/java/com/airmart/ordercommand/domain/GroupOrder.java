@@ -11,6 +11,11 @@ public class GroupOrder extends BaseAuditor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Data Format => YYYYMMDDHHMMSS-UUID
+     */
+    private String groupOrderId;
+
     @OneToMany(mappedBy = "groupOrder")
     private List<Order> orders = new ArrayList<>();
 
