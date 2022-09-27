@@ -29,6 +29,7 @@ public class OrderFacade {
     // GroupOrder 와 Order 생성
     GroupOrder groupOrder = orderService.createGroupOrder(request.toEntity(0L, 5));
     // 결제 (paymentService) -> 실패 대응 ( Fallback 패턴 으로 주문 실패로 변경 필요 )
-    return null;
+
+   return null;
   }
 }
