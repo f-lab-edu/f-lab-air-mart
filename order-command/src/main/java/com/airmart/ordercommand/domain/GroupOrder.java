@@ -1,5 +1,6 @@
 package com.airmart.ordercommand.domain;
 
+import com.airmart.ordercommand.domain.embed.Orders;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,10 +21,8 @@ public class GroupOrder extends BaseAuditor {
      * Data Format => YYYYMMDDHHMMSS-UUID
      */
     private String groupOrderId;
-
-    @OneToMany(mappedBy = "groupOrder", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<Order> orders = new ArrayList<>();
-
+    @Embedded
+    private Orders orders;
     private Integer minimumQuantity;
 
     private LocalDateTime startDate;
@@ -39,7 +38,6 @@ public class GroupOrder extends BaseAuditor {
     }
 
     public void addOrder(Order order) {
-        if (order == null) throw new RuntimeException();
-        orders.add(order);
+        orders.addOrder(order);
     }
 }
