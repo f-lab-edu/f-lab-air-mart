@@ -26,11 +26,9 @@ public class OrderFacade {
 
   public GroupOrderCreateResponse createGroupOrder(GroupOrderCreateRequest request) {
     // Item 조회, 재고 확인 ( price 와 minimumQuantity 조회 필요 )
-
     // GroupOrder 와 Order 생성
-    GroupOrder groupOrder = orderService.createGroupOrder(request.toEntity(0L, 0));
-    // 결제 (paymentService)
-    // 공구 성공여부 판단 -> 성공시 부가 작업 실행
+    GroupOrder groupOrder = orderService.createGroupOrder(request.toEntity(0L, 5));
+    // 결제 (paymentService) -> 실패 대응 ( Fallback 패턴 으로 주문 실패로 변경 필요 )
     return null;
   }
 }

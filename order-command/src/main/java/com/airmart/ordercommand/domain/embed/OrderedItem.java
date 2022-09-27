@@ -1,6 +1,8 @@
 package com.airmart.ordercommand.domain.embed;
 
+import java.util.Optional;
 import javax.persistence.Embeddable;
+import lombok.Getter;
 
 @Embeddable
 public class OrderedItem {
@@ -21,5 +23,9 @@ public class OrderedItem {
 
     public static OrderedItem newInstance(Long quantity, Long price) {
         return new OrderedItem(quantity, price);
+    }
+
+    public Optional<Long> getQuantity() {
+        return Optional.of(quantity);
     }
 }

@@ -7,7 +7,9 @@ import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @NoArgsConstructor
 @Entity
@@ -40,5 +42,11 @@ public class GroupOrder extends BaseAuditor {
 
     public void addOrder(Order order) {
         orders.addOrder(order);
+    }
+
+    public void checkGroupOrderSuccess() {
+        Long totalQuantity = orders.getTotalQuantity();
+        log.debug("totalQuantity : {}", totalQuantity);
+        if (minimumQuantity <= totalQuantity) orders.changeToShippingReady();
     }
 }

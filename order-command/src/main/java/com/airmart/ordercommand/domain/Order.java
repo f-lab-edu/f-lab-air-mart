@@ -59,4 +59,14 @@ public class Order extends BaseAuditor{
         this.groupOrder = groupOrder;
         groupOrder.addOrder(this);
     }
+
+    public Long getQuantity() {
+        return orderedItem
+            .getQuantity().orElseGet(() -> 0L);
+    }
+
+    public void changeToReady() {
+        if (this.status != OrderStatus.GROUP_BUYING_INIT) throw new RuntimeException();
+        this.status = OrderStatus.SHIPPING_READY;
+    }
 }

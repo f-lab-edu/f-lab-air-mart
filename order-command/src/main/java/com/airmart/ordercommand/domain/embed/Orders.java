@@ -16,4 +16,15 @@ public class Orders {
     if (order == null) throw new RuntimeException();
     orders.add(order);
   }
+
+  public Long getTotalQuantity() {
+    return orders.stream()
+        .map(Order::getQuantity)
+        .reduce(Long::sum).orElseThrow(RuntimeException::new);
+  }
+
+  public void changeToShippingReady() {
+    if (orders.size() == 0) throw new RuntimeException();
+    orders.forEach(Order::changeToReady);
+  }
 }
