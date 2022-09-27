@@ -1,10 +1,9 @@
 package com.airmart.ordercommand.domain;
 
+import com.airmart.ordercommand.common.utils.IdentifierGenerator;
 import com.airmart.ordercommand.domain.embed.Orders;
 import java.time.LocalDateTime;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ public class GroupOrder extends BaseAuditor {
      */
     private String groupOrderId;
     @Embedded
-    private Orders orders;
+    private Orders orders = new Orders();
     private Integer minimumQuantity;
 
     private LocalDateTime startDate;
@@ -32,9 +31,11 @@ public class GroupOrder extends BaseAuditor {
     @Builder
     public GroupOrder(Integer minimumQuantity,
         LocalDateTime startDate, LocalDateTime endDate, Order order) {
+        this.groupOrderId = IdentifierGenerator.randomIdentifier();
         this.minimumQuantity = minimumQuantity;
         this.startDate = startDate;
         this.endDate = endDate;
+        order.joinGroupOrder(this);
     }
 
     public void addOrder(Order order) {

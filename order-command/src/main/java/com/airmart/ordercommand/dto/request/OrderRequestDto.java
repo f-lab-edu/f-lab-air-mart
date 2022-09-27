@@ -49,19 +49,22 @@ public class OrderRequestDto {
     public GroupOrder toEntity(long price, int minimumQuantity) {
       LocalDateTime startDate = LocalDateTime.now();
       LocalDateTime endDate = startDate.plusHours(hours);
-      GroupOrder groupOrder = GroupOrder.builder()
-          .minimumQuantity(minimumQuantity)
-          .startDate(startDate)
-          .endDate(endDate)
-          .build();
-
       Order newOrder = new Order(
           OrderType.GROUP_ORDER
           , OrderedItem.newInstance(this.quantity, price)
           , recipientInfo.toVO()
           , sendInfo.toVo()
       );
-      newOrder.joinGroupOrder(groupOrder);
+
+
+      GroupOrder groupOrder = GroupOrder.builder()
+          .minimumQuantity(minimumQuantity)
+          .startDate(startDate)
+          .endDate(endDate)
+          .order(newOrder)
+          .build();
+
+
       return groupOrder;
     }
   }

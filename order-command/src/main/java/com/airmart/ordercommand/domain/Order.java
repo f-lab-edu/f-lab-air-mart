@@ -1,5 +1,6 @@
 package com.airmart.ordercommand.domain;
 
+import com.airmart.ordercommand.common.utils.IdentifierGenerator;
 import com.airmart.ordercommand.domain.embed.OrderedItem;
 import com.airmart.ordercommand.domain.embed.RecipientInfo;
 import com.airmart.ordercommand.domain.embed.SenderInfo;
@@ -45,10 +46,12 @@ public class Order extends BaseAuditor{
 
     public Order(OrderType orderType, OrderedItem orderedItem, RecipientInfo recipientInfo,
         SenderInfo senderInfo) {
+        this.orderId = IdentifierGenerator.randomIdentifier();
         this.orderType = orderType;
         this.orderedItem = orderedItem;
         this.recipientInfo = recipientInfo;
         this.senderInfo = senderInfo;
+        this.status = OrderStatus.GROUP_BUYING_INIT;
     }
 
     public void joinGroupOrder(GroupOrder groupOrder) {
