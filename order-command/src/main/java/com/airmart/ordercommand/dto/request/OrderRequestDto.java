@@ -43,19 +43,21 @@ public class OrderRequestDto {
      * price 및 minimumQuantity 는 Item을 통해 발생한다.
      *
      * @return
+     * @param price
+     * @param minimumQuantity
      */
-    public GroupOrder toEntity() {
+    public GroupOrder toEntity(long price, int minimumQuantity) {
       LocalDateTime startDate = LocalDateTime.now();
       LocalDateTime endDate = startDate.plusHours(hours);
       GroupOrder groupOrder = GroupOrder.builder()
-          .minimumQuantity(0)
+          .minimumQuantity(minimumQuantity)
           .startDate(startDate)
           .endDate(endDate)
           .build();
 
       Order newOrder = new Order(
           OrderType.GROUP_ORDER
-          , OrderedItem.newInstance(this.quantity, 0L)
+          , OrderedItem.newInstance(this.quantity, price)
           , recipientInfo.toVO()
           , sendInfo.toVo()
       );
