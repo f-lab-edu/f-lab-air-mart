@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class ItemDTO {
+public class ItemCommandDTO {
 
     @Data
     @Builder
@@ -16,6 +16,7 @@ public class ItemDTO {
         String userName;
         Long itemPrice;
         String category;
+        Long days;
     }
 
     @Data
@@ -28,5 +29,6 @@ public class ItemDTO {
         Long itemPrice;
         String category;
         String userName;
+        String closingDateTime;
     }
 }

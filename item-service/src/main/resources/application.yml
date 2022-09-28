@@ -13,8 +13,18 @@ spring:
     database: mysql
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  data:
+    mongodb:
+      username: root
+      password: root
+      uri: 'mongodb://root:root@localhost:27017/item_query_cache?authSource=admin'
 
 eureka:
   client:
