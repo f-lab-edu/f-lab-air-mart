@@ -1,16 +1,42 @@
 package com.airmart.itemservice.itemquery.service.Implement;
 
+import com.airmart.itemservice.itemcommand.dto.ItemCommandDTO;
+import com.airmart.itemservice.itemquery.domain.ItemEntryVO;
+import com.airmart.itemservice.itemquery.domain.entity.ClosingItemList;
 import com.airmart.itemservice.itemquery.dto.ItemQueryDTO;
+import com.airmart.itemservice.itemquery.repository.ItemQueryRepository;
 import com.airmart.itemservice.itemquery.service.ItemQueryService;
+import com.airmart.itemservice.itemquery.service.util.ItemQueryMapper;
+import com.airmart.itemservice.itemquery.service.util.SequenceGeneratorService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ItemQueryServiceImpl implements ItemQueryService {
+
+    private final ItemQueryRepository itemQueryRepository;
+    private final SequenceGeneratorService sequenceGeneratorService;
+    private final ItemQueryMapper itemQueryMapper;
 
     @Override
     public ItemQueryDTO.Response getClosingItemList() {
         return null;
+    }
+
+    @Override
+    public void cachingClosingItems(List<ItemCommandDTO.Response> itemList) {
+        ClosingItemList closingItemList = ClosingItemList.builder()
+                .id(sequenceGeneratorService.generateSequence(ClosingItemList.SEQUENCE_NAME))
+                .closingItemList(itemList.stream()
+                        .map(itemQueryMapper::toItemEntry)
+                        .collect(Collectors.toList()))
+                .build();
+        itemQueryRepository.save(closingItemList);
     }
 }

@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemEntryVO {
     private Long id;
-    private Long itemName;
+    private String itemName;
+    private String closeTime;
 }
