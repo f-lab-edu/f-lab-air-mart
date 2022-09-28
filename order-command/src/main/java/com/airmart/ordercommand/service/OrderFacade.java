@@ -14,7 +14,6 @@ public class OrderFacade {
   private final OrderService orderService;
   public OrderCreateResponse createOrder(String groupOrderId, OrderCreateRequest request) {
     // GroupOrder 찾기
-    // Valid 작업 진행 - 재고 확인 필요 <- 현 시점에 제외
     // Group 참여 가능여부 체크
     // Order 생성
     // 공구 성공여부 판단후 Order 상태 변경
@@ -29,6 +28,7 @@ public class OrderFacade {
     // GroupOrder 와 Order 생성
     GroupOrder groupOrder = orderService.createGroupOrder(request.toEntity(0L, 5));
     // 결제 (paymentService) -> 실패 대응 ( Fallback 패턴 으로 주문 실패로 변경 필요 )
+    // Redis 에 정보 쌓기 ? ( 클라우드 공통으로 쓴다고 가정? )
    return null;
   }
 }

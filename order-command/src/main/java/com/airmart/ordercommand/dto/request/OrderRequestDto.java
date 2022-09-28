@@ -12,19 +12,22 @@ import lombok.Data;
 public class OrderRequestDto {
   @Data
   public static class OrderCreateRequest {
-
-    /**
-     * Format => YYYYMMDDHHMMSS-UUID
-     * - Nullable
-     */
-    private String groupOrderId;
-
     private Long itemId;
 
     private Long quantity;
-    /**
-     * 추후 상세 데이터 추가예정.
-     */
+
+    private SendInfoRequest sendInfo;
+
+    private RecipientInfoRequest recipientInfo;
+
+    public Order toEntity(long price) {
+      return new Order(
+          OrderType.GROUP_ORDER
+          , OrderedItem.newInstance(this.quantity, price)
+          , recipientInfo.toVO()
+          , sendInfo.toVo()
+      );
+    }
   }
 
   @Data
