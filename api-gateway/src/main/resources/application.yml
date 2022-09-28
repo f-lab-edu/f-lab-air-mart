@@ -11,6 +11,10 @@ spring:
           predicates:
             - Path=/orders/**
             - Method=POST,PUT,DELETE
+        - id: item-service
+          uri: lb://ITEM-SERVICE
+          predicates:
+            - Path=/items/**
 
 server:
   port: 8072
