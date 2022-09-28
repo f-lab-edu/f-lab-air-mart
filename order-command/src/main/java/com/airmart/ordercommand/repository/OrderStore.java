@@ -1,7 +1,6 @@
 package com.airmart.ordercommand.repository;
 
 import com.airmart.ordercommand.domain.GroupOrder;
-import com.airmart.ordercommand.domain.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,5 +15,10 @@ public class OrderStore {
 
   public GroupOrder createGroupOrder(GroupOrder groupOrder) {
     return groupOrderRepository.save(groupOrder);
+  }
+
+  public GroupOrder findGroupOrderBy(String groupOrderId) {
+    return groupOrderRepository.findByGroupOrderId(groupOrderId)
+        .orElseThrow(RuntimeException::new);
   }
 }

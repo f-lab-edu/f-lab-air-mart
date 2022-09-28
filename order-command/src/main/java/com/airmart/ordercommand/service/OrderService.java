@@ -15,7 +15,17 @@ public class OrderService {
 
   public GroupOrder createGroupOrder(GroupOrder newOrder) {
     GroupOrder groupOrder = orderStore.createGroupOrder(newOrder);
+    groupOrder.checkGroupOrderSuccess();
     // 공구 성공여부 판단 -> 성공시 부가 작업 실행
+    return groupOrder;
+  }
+
+  public GroupOrder addOrder(String groupOrderId, Order newOrder) {
+    // Group 참여 가능여부 체크
+    GroupOrder groupOrder = orderStore.findGroupOrderBy(groupOrderId);
+    groupOrder.validOrderCreation();
+    newOrder.joinGroupOrder(groupOrder);
+    // Redis 에 정보 쌓기 ? ( 클라우드 공통으로 쓴다고 가정? )
     groupOrder.checkGroupOrderSuccess();
     return groupOrder;
   }

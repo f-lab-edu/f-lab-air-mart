@@ -46,7 +46,14 @@ public class GroupOrder extends BaseAuditor {
 
     public void checkGroupOrderSuccess() {
         Long totalQuantity = orders.getTotalQuantity();
-        log.debug("totalQuantity : {}", totalQuantity);
         if (minimumQuantity <= totalQuantity) orders.changeToShippingReady();
+    }
+
+    /**
+     * GroupOrder 에 Status를 Order와 상관 없이 가져가는 방법 고민해볼 필요 있어보임.
+     */
+    public void validOrderCreation() {
+        Long totalQuantity = orders.getTotalQuantity();
+        if (minimumQuantity <= totalQuantity) throw new RuntimeException();
     }
 }
