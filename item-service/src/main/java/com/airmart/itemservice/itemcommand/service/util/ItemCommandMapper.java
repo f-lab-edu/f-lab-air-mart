@@ -1,4 +1,4 @@
-package com.airmart.itemservice.itemcommand.service.implement.util;
+package com.airmart.itemservice.itemcommand.service.util;
 
 import com.airmart.itemservice.itemcommand.domain.Category;
 import com.airmart.itemservice.itemcommand.domain.entity.Item;
