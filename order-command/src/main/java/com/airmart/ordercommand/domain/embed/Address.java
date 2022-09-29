@@ -13,10 +13,13 @@ public class Address {
     private String secondAddress;
     private String zipCode;
 
-    @Builder
-    public Address(String firstAddress, String secondAddress, String zipCode) {
+    private Address(String firstAddress, String secondAddress, String zipCode) {
         this.firstAddress = firstAddress;
         this.secondAddress = secondAddress;
         this.zipCode = zipCode;
+    }
+
+    public static Address newInstance(String firstAddress, String secondAddress, String zipCode) {
+        return new Address(firstAddress, secondAddress, zipCode);
     }
 }
