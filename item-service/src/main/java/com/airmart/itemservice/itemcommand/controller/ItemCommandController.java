@@ -51,7 +51,7 @@ public class ItemCommandController {
         return ResponseEntity.ok().body(CommonResponse.success("item deleted"));
     }
 
-    @GetMapping("/closing")
+    @GetMapping("/batch/closing")
     public ResponseEntity<CommonResponse<List<ItemCommandDTO.Response>>> getClosingItems(){
         List<ItemCommandDTO.Response> itemList = itemCommandService
                 .getClosingItemList();

@@ -24,6 +24,11 @@ public class SequenceGeneratorService {
                 options().returnNew(true).upsert(true),
                 DatabaseSequence.class
         );
-        return !Objects.isNull(databaseSequence) ? databaseSequence.getSeq() : 1 ;
+        return !Objects.isNull(databaseSequence) ? databaseSequence.getSeq() : 1L;
+    }
+
+    public long getCurrentSequence(String seqName){
+        DatabaseSequence databaseSequence = mongoOperations.findById(seqName, DatabaseSequence.class);
+        return !Objects.isNull(databaseSequence) ? databaseSequence.getSeq() : 1L;
     }
 }

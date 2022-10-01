@@ -1,5 +1,7 @@
 package com.airmart.itemservice.itemquery.service.Implement;
 
+import com.airmart.itemservice.common.exception.BusinessException;
+import com.airmart.itemservice.common.exception.BusinessExceptionDictionary;
 import com.airmart.itemservice.itemcommand.dto.ItemCommandDTO;
 import com.airmart.itemservice.itemquery.domain.ItemEntryVO;
 import com.airmart.itemservice.itemquery.domain.entity.ClosingItemList;
@@ -26,7 +28,13 @@ public class ItemQueryServiceImpl implements ItemQueryService {
 
     @Override
     public ItemQueryDTO.Response getClosingItemList() {
-        return null;
+        ClosingItemList closingItemList = itemQueryRepository
+                .findById(sequenceGeneratorService
+                        .getCurrentSequence(ClosingItemList.SEQUENCE_NAME))
+                .orElseThrow(() -> BusinessException.create(BusinessExceptionDictionary.UNKNOWN));
+        return ItemQueryDTO.Response.builder()
+                .itemList(closingItemList.getClosingItemList())
+                .build();
     }
 
     @Override
