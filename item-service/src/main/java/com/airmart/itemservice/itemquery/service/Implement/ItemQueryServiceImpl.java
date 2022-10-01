@@ -25,13 +25,16 @@ public class ItemQueryServiceImpl implements ItemQueryService {
     private final ItemQueryRepository itemQueryRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
     private final ItemQueryMapper itemQueryMapper;
+    private static long closingItemSeq = 0L;
 
     @Override
     public ItemQueryDTO.Response getClosingItemList() {
         ClosingItemList closingItemList = itemQueryRepository
-                .findById(sequenceGeneratorService
-                        .getCurrentSequence(ClosingItemList.SEQUENCE_NAME))
-                .orElseThrow(() -> BusinessException.create(BusinessExceptionDictionary.UNKNOWN));
+                .findById(closingItemSeq)
+                .orElseThrow(() -> {
+                    log.error("Closing Item List Seq: " + closingItemSeq);
+                    return BusinessException.create(BusinessExceptionDictionary.UNKNOWN);
+                });
         return ItemQueryDTO.Response.builder()
                 .itemList(closingItemList.getClosingItemList())
                 .build();
@@ -46,5 +49,6 @@ public class ItemQueryServiceImpl implements ItemQueryService {
                         .collect(Collectors.toList()))
                 .build();
         itemQueryRepository.save(closingItemList);
+        closingItemSeq = closingItemList.getId();
     }
 }
