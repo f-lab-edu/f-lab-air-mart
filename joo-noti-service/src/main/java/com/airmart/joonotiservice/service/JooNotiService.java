@@ -5,5 +5,5 @@ import com.airmart.joonotiservice.dto.NotificationDTO;
 import java.util.List;
 
 public interface JooNotiService {
-    List<NotificationDTO.Response> getNotificationList();
+    List<NotificationDTO.Response> getNotificationList(String userId);
 }
