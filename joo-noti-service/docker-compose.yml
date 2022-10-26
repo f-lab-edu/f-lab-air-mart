@@ -12,16 +12,15 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: root # 데이터 보존 계획이 없으므로 편의를 위하여 비밀번호 노출
-      MYSQL_DATABASE: orders
+      MYSQL_DATABASE: notification_log
       MYSQL_TCP_PORT: 3308
 
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: zookeeper
     ports:
       - "2181:2181"
   kafka:
-    #build: .
-    image: wurstemister/zookeeper
+    image: wurstmeister/kafka
     ports:
       - "9092:9092"
     environment:
