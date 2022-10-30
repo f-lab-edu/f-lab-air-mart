@@ -20,7 +20,7 @@ public class NotificationLog {
     @Column(nullable = false)
     private String notification;
 
-    private boolean read;
+    private boolean readAlready;
 
     @Column(nullable = false)
     private String userId;
