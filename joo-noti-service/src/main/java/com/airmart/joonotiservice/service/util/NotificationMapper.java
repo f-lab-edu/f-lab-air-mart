@@ -13,7 +13,7 @@ public class NotificationMapper {
         return NotificationDTO.Response.builder()
                 .notification(notificationLog.getNotification())
                 .createdAt(notificationLog.getCreatedAt().toString())
-                .read(notificationLog.isRead())
+                .read(notificationLog.isReadAlready())
                 .build();
     }
 }

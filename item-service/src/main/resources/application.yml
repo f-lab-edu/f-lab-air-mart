@@ -25,6 +25,17 @@ spring:
       username: root
       password: root
       uri: 'mongodb://root:root@localhost:27017/item_query_cache?authSource=admin'
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
 
 eureka:
   client:
