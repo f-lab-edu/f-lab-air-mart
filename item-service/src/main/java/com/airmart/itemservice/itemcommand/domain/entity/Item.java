@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -28,5 +29,17 @@ public class Item {
 
     @Convert(converter = CategoryConverter.class)
     private Category category;
+
+    @Column(nullable = false)
+    private String userName;
+
+    @Column(nullable = false)
+    private LocalDateTime closedAt;
+
+    @Column(columnDefinition = "timestamp default current_timestamp")
+    private LocalDateTime createdAt;
+
+    @Column(columnDefinition = "timestamp default current_timestamp on update current_timestamp")
+    private LocalDateTime updatedAt;
 
 }

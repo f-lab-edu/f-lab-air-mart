@@ -15,4 +15,16 @@ services:
       MYSQL_DATABASE: item
 #    volumes:
 #      -
+  mongodb:
+    image: 'mongo:latest'
+    container_name: item_query_cache
+    restart: always
+    ports:
+      - '27017:27017'
+#    volumes:
+#      - ./mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=item_query_cache
 
